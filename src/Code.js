@@ -6,6 +6,8 @@ const range = sheet.getRange(3, e.range.getColumn());
 const value = range.getValue(); 
 const totalTasksRange = sheet.getRange(6, 1, sheet.getLastRow() - 5, sheet.getLastColumn()); 
 const totalTasksArray = totalTasksRange.getValues(); 
+const currentTaskTotalRange = sheet.getRange(e.range.getRow(), 1, 1, e.range.getLastRow()); 
+let currentTaskTotalArray = currentTaskTotalRange.getValues(); 
 
 if(value === "Priority") {
 
@@ -41,6 +43,26 @@ if(value === "Priority") {
 } else if (value === "Status"){
 
   fun.setStatusHighlighting(ss, e.range.getRow(), fun.getEventData(e).taskStatus); 
+
+} else if (value == "Task") {
+
+  const taskID = Math.floor(Math.random() * 100000);
+  const taskType = "Required"; 
+  let startDate = new Date();  
+  const statusValue = "New Task"; 
+  const assignedPerson = "Mr. Fahad"; 
+  const priorityvValue = ""; 
+
+  currentTaskTotalArray[0][0] = taskID; 
+  currentTaskTotalArray[0][1] = taskType; 
+  currentTaskTotalArray[0][3] = statusValue; 
+  currentTaskTotalArray[0][6] = startDate
+  currentTaskTotalArray[0][4] = assignedPerson; 
+
+  currentTaskTotalRange.clearFormat(); 
+  currentTaskTotalRange.setValues(currentTaskTotalArray); 
+  fun.setStatusHighlighting(ss, e.range.getRow(), fun.getEventData(e).taskStatus)
+
 }; 
 
 
