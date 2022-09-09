@@ -1,3 +1,11 @@
+function onOpen(e) {
+  SpreadsheetApp.getUi()
+  .createMenu('CMYK')
+  .addItem('Archive Completed Tasks', 'archiveCompleted')
+  .addToUi(); 
+}; 
+
+
 function onEdit(e) {
 
 const ss = SpreadsheetApp.getActiveSpreadsheet(); 
