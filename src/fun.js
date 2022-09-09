@@ -261,6 +261,68 @@ const fun = {
     const taskSingleRowArray = ''; 
 
 
+  }, 
+
+  setStatusHighlighting: function (spreadSheet, rowNum, rowStatus) {
+
+    const targetSheet = spreadSheet.getActiveSheet(); 
+    const targetRange = targetSheet.getRange(rowNum, 1, 1, targetSheet.getLastColumn()); 
+    Logger.log("Status highling function in progress! ;-)")
+    Logger.log("RowStatus Value will come here") 
+    Logger.log(rowStatus); 
+    Logger.log("Row number will come here") 
+    Logger.log(rowNum); 
+    targetRange.clearFormat(); 
+
+    if (rowStatus === "Not Started") {
+      targetRange
+      .setBackground("white")
+      .setFontStyle('normal')
+      .setFontColor('black'); 
+    } else if ( rowStatus === "In Progress") {
+      targetRange
+      .setBackground("#f37735")
+      .setFontStyle("bold")
+      .setFontStyle("italic")
+      .setFontColor("white"); 
+    } else if (rowStatus === "Pending Input") {
+      targetRange
+      .setBackground("#ffc425")
+      .setFontStyle("italic")
+      .setFontColor("red"); 
+    } else if(rowStatus === "Stuck") {
+      targetRange
+      .setBackground("#d11141")
+      .setFontColor("white")
+      .setFontWeight('bold') 
+    } else if( rowStatus === "Done") {
+      targetRange
+      .setBackground("#00b159")
+      .setFontColor("white")
+      .setFontStyle("italic")
+      .setFontLine('line-through'); 
+    } else if(rowStatus === "Skipped") {
+      targetRange
+      .setBackground("#aa6f73")
+      .setFontColor("white")
+      .setFontStyle("italic")
+      .setFontLine('line-through')
+    } else if ( rowStatus === "New Task") {
+      targetRange
+      .setBackground("#00aedb")
+      .setFontColor('white')
+      .setFontWeight('bold')
+    } else if ( rowStatus === "Paused") {
+      targetRange
+      .setBackground('grey')
+      .setFontColor('white')
+      .setFontStyle('italic'); 
+    }  else {
+      Logger.log("No matching criteria for status highlighting found"); 
+    }; 
+
+    Logger.log("Status Highlighting successfully applied")
+
   }
 
 }; 
