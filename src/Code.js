@@ -11,6 +11,7 @@ function archiveCompleted() {
   const sheet = ss.getSheetByName('Assignments'); 
   const totalTasksRange = sheet.getRange(6, 1, sheet.getLastRow() - 5, sheet.getLastColumn()); 
   const totalTasksArray = totalTasksRange.getValues(); 
+  
 
   const completedTasksArray = totalTasksArray.filter( task => {
 
@@ -50,8 +51,16 @@ function archiveCompleted() {
     
      formatRange = sheet.getRange(rowNumber, 1, 1, sheet.getLastColumn()); 
      fun.setStatusHighlighting(ss, rowNumber, statusCellValue ); 
+     
+    
 
   });
+
+  const targetArchiveSheet = ss.getSheetByName('Completed Tasks'); 
+  const targetRange = targetArchiveSheet.getRange(targetArchiveSheet.getLastRow(), 1, completedTasksArray.length, completedTasksArray[0].length); 
+  targetRange.setValues(completedTasksArray); 
+  targetRange.setHorizontalAlignment("center"); 
+  targetRange.clearFormat(); 
 
 
 }
